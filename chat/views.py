@@ -7,6 +7,7 @@ from . models import Message
 from django.db.models import Q
 # Create your views here.
 
+@login_required
 def home(request):
     users = User.objects.exclude(id=request.user.id)
     return render(request, 'home.html', {'users': users})
@@ -55,7 +56,6 @@ def sign_out(request):
     logout(request)
     return redirect('login')
 
-@login_required
 def chat_user(request,username):
     other_user = get_object_or_404(User, username=username)
     current_user = request.user
@@ -65,7 +65,7 @@ def chat_user(request,username):
             Message.objects.create(
             sender = current_user,
             receiver = other_user,
-            content = request.POST.get('message')
+            content = content
         )
         return redirect('chat_user', username=other_user.username)
     
