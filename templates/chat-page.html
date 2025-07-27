@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        /* --- Basic Reset & Font --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #e5ddd5; /* WhatsApp-like textured background color */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* --- Chat Container --- */
+        .chat-container {
+            width: 100%;
+            max-width: 800px;
+            height: 95vh;
+            background-color: #f0f2f5;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* --- Chat Header --- */
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #f0f2f5;
+            border-bottom: 1px solid #ddd;
+            flex-shrink: 0;
+        }
+        .chat-header .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .chat-header .chat-info {
+            flex-grow: 1;
+        }
+        .chat-header .chat-info h3 { margin: 0; font-size: 1rem; }
+        .chat-header .chat-info p { margin: 2px 0 0 0; font-size: 0.8rem; color: #666; }
+
+        /* --- Message Display Area --- */
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            /* Subtle background pattern */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"-color="rgba(229,221,213,0.4)"><path d="M100 0 l0 400" stroke="rgba(0,0,0,0.06)" stroke-width="1"/><path d="M200 0 l0 400" stroke="rgba(0,0,0,0.06)" stroke-width="1"/><path d="M300 0 l0 400" stroke="rgba(0,0,0,0.06)" stroke-width="1"/><path d="M0 100 l400 0" stroke="rgba(0,0,0,0.06)" stroke-width="1"/><path d="M0 200 l400 0" stroke="rgba(0,0,0,0.06)" stroke-width="1"/><path d="M0 300 l400 0" stroke="rgba(0,0,0,0.06)" stroke-width="1"/></svg>');
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* --- Individual Message Bubbles --- */
+        .message {
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+            padding: 8px 12px;
+            border-radius: 12px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .message-content {
+            margin-right: 45px; /* Space for timestamp */
+        }
+        .timestamp {
+            font-size: 0.75rem;
+            color: #999;
+            position: absolute;
+            bottom: 6px;
+            right: 12px;
+        }
+
+        /* --- Sent Messages --- */
+        .sent {
+            align-self: flex-end;
+            background-color: #dcf8c6; /* Light green like WhatsApp */
+            box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+        }
+        .sent .timestamp { color: #8da27e; }
+
+        /* --- Received Messages --- */
+        .received {
+            align-self: flex-start;
+            background-color: #ffffff;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+        }
+        
+        /* --- Message Input Form --- */
+        .message-form {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #f0f2f5;
+            flex-shrink: 0;
+            gap: 10px;
+        }
+        .message-form button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #54656f;
+            padding: 8px;
+        }
+        .message-form button:hover { color: #007bff; }
+        .message-form input[type="text"] {
+            flex: 1;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1rem;
+            background-color: #fff;
+            outline: none;
+        }
+        .send-button {
+            background-color: #007bff !important;
+            color: white !important;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .send-button:hover { background-color: #0056b3 !important; }
+
+    </style>
+</head>
+
+<body>
+    <main class="chat-container">
+        <header class="chat-header">
+            <div class="avatar">{{ other_user.username|slice:":1"|upper }}</div>
+            <div class="chat-info">
+                <div class="chat-info">
+                <h3>{{ other_user.username }}</h3>
+                <p>Online</p>
+            </div>
+        </header>
+
+        <div class="messages">
+            {% for msg in messages %}
+                <div class="message {% if msg.sender == request.user %}sent{% else %}received{% endif %}">
+                    <span class="message-content">{{ msg.content }}</span>
+                    <span>{{ msg.timestamp|time:"g:i A" }}</span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form class="message-form" action="" method="POST">
+            {% csrf_token %}
+            <button type="button" title="Emojis">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
+            </button>
+            <input type="text" name="message" required placeholder="Type a message...">
+            <button class="send-button" type="submit" title="Send">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </form>
+    </main>
+</body>
+</html>
