@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-f6lz&&2g&4=9hi(8b%ab)oxeklw3f5^eb&5re2t%3c(y!^7qtz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['user-chatbot-dr7g.onrender.com','127.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['user-chatbot-dr7g.onrender.com','127.0.0.1', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://user-chatbot-dr7g.onrender.com']
 
 # Application definition

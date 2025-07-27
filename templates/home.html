@@ -8,15 +8,10 @@
         /* --- Basic Reset & Font --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #e9e9e9;
+            /* MODIFIED: Slightly different background color */
+            background-color: #f7f8fc; 
             margin: 0;
             color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
         }
 
         a {
@@ -24,199 +19,163 @@
             color: inherit;
         }
 
-        /* --- Main App Container (WhatsApp-like window) --- */
-        .app-container {
-            width: 100%;
-            max-width: 1400px;
-            height: 95vh;
-            background-color: #ffffff;
-            border-radius: 4px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-            display: flex;
-            overflow: hidden;
+        /* --- Main Container --- */
+        .container {
+            /* MODIFIED: Adjusted max-width for a vertical list */
+            max-width: 700px; 
+            margin: 40px auto;
+            padding: 20px;
         }
 
-        /* --- Left Panel: Sidebar --- */
-        .sidebar {
-            width: 100%;
-            max-width: 380px;
-            background-color: #fff;
-            border-right: 1px solid #ddd;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-header {
-            padding: 10px 15px;
-            background-color: #f0f2f5;
+        /* --- Header: Title and Logout --- */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 30px;
         }
 
-        .user-profile {
+        header h1 {
+            font-size: 2rem;
+            /* MODIFIED: Softer black for text */
+            color: #2d3748; 
+            margin: 0;
+        }
+        
+        /* --- Logout Button --- */
+        .logout-btn {
+            background-color: #e53e3e; /* Softer red */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #c53030;
+        }
+
+        /* --- User List as a single vertical column --- */
+        .user-list {
+            /* MODIFIED: Changed from grid to a flex column */
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 15px;
         }
 
+        /* --- Individual User Card --- */
+        .user-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            /* MODIFIED: Increased padding slightly */
+            padding: 25px; 
+            /* MODIFIED: Softer shadow */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); 
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .user-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* --- Avatar Placeholder --- */
         .avatar {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background-color: #007bff;
-            color: white;
+            /* MODIFIED: New color scheme */
+            background-color: #eef2ff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            color: #6366f1; /* New primary color */
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
         
-        .username {
-            font-weight: 600;
-        }
-
-        .logout-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #606770;
-            padding: 5px;
-        }
-        .logout-btn:hover { color: #dc3545; }
-
-        .search-container {
-            padding: 10px 15px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f0f2f5;
-            box-sizing: border-box;
-        }
-        .search-container input:focus { outline: none; border-color: #007bff; }
-        
-        /* --- Chat List in Sidebar --- */
-        .chat-list {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .chat-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            border-bottom: 1px solid #f0f2f5;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .chat-item:hover { background-color: #f5f5f5; }
-        .chat-item.active { background-color: #e9e9eb; } /* Style for selected chat */
-
-        .chat-details {
+        /* --- User Info --- */
+        .user-info {
             flex-grow: 1;
-            overflow: hidden;
+            overflow: hidden; 
         }
 
-        .chat-details .username { font-size: 1rem; margin: 0; }
-        .last-message {
-            font-size: 0.9rem;
-            color: #606770;
+        .user-info .username {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+            color: #2d3748;
+        }
+        .user-info .last-message {
+             font-size: 0.9rem;
+            color: #718096; /* Softer grey */
             margin: 4px 0 0 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        
-        .chat-meta {
-            text-align: right;
-            font-size: 0.75rem;
-            color: #606770;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 5px;
-        }
-        
-        .unread-badge {
-            background-color: #007bff; /* Using your primary color for unread */
-            color: white;
-            min-width: 20px;
-            height: 20px;
-            padding: 0 6px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
 
-        /* --- Right Panel: Main Chat Area --- */
-        .main-content {
-            flex: 1;
-            background-color: #f0f2f5;
+        /* --- Unread Message Badge --- */
+        .unread-badge {
+            /* MODIFIED: Using new primary color for consistency */
+            background-color: #6366f1; 
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            color: #606770;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
         }
-        
-        .placeholder-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            opacity: 0.4;
-        }
-        
-        .main-content h2 { font-size: 1.8rem; margin: 0; color: #444; }
-        .main-content p { font-size: 1rem; max-width: 400px; }
 
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <aside class="sidebar">
-            <header class="sidebar-header">
-                <div class="user-profile">
-                    <div class="avatar">{{ request.user.username|first|upper }}</div>
-                    <span class="username">{{ request.user.username }}</span>
-                </div>
-                <a href="{% url 'logout' %}" class="logout-btn" title="Logout">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                </a>
-            </header>
-            <div class="search-container">
-                <input type="text" placeholder="Search or start a new chat">
-            </div>
-            <div class="chat-list">
-                {% for user in users %}
-                    <a href="{% url 'chat_user' username=user.username %}" class="chat-item">
-                        <div class="avatar">{{ user.username|first|upper }}</div>
-                        <div class="chat-details">
-                            <p class="username">{{ user.username }}</p>
-                            <p class="last-message">Click to start chatting...</p>
-                        </div>
-                        <div class="chat-meta">
-                            <span class="timestamp"></span>
-                             </div>
-                    </a>
-                {% endfor %}
-            </div>
-        </aside>
+  <main class="container">
+    <header>
+        <h1>Welcome, {{ request.user.username }}!</h1>
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </header>
+    
+    <section>
+        <h2>Chats</h2>
+        <div class="user-list">
+            {% for item in users_list %}
+              <a href="{% url 'chat_user' username=item.user_object.username %}" class="user-card">
+                  <div class="avatar">
+                      {{ item.user_object.username|first|upper }}
+                  </div>
+                  <div class="user-info">
+                      <p class="username">{{ item.user_object.username }}</p>
+                      <p class="last-message">{{ item.last_message }}</p>
+                  </div>
+                  
+                  {% if item.unread_count > 0 %}
+                    <div class="unread-badge" title="{{ item.unread_count }} unread messages">
+                        {{ item.unread_count }}
+                    </div>
+                  {% endif %}
+              </a>
+            {% endfor %}
 
-        <main class="main-content">
-            <div>
-                <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4.521 3.88a.75.75 0 0 1 .14.04l16.5 7.5a.75.75 0 0 1 0 1.16l-16.5 7.5a.75.75 0 0 1-1.161-.58V4.46a.75.75 0 0 1 1.021-.58Z" /></svg>
-                <h2>Welcome to Your Chat App</h2>
-                <p>Select a chat from the left panel to read messages or start a new conversation.</p>
-            </div>
-        </main>
-    </div>
+            <a href="#" class="user-card">
+                <div class="avatar">A</div>
+                <div class="user-info">
+                    <p class="username">Alice</p>
+                    <p class="last-message">Sounds great, see you then!</p>
+                </div>
+                <div class="unread-badge">2</div>
+              </a>
+        </div>
+    </section>
+  </main>
 </body>
 </html>
