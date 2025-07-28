@@ -84,7 +84,7 @@ user-to-user-chatbot/
 
 ## 👨‍💻 Author
 Rahul Ramesh
-🔗 https://github.com/rahulrameshm0/user-to-user-chatbot.git
+- 🔗 https://github.com/rahulrameshm0/user-to-user-chatbot.git
 
 ## 🌐 Deployment (Optional)
 
