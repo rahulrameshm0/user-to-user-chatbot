@@ -31,7 +31,6 @@ A Django-based real-time messaging web application that allows registered users 
 git clone https://github.com/rahulrameshm0/user-to-user-chatbot.git
 cd user-to-user-chatbot
 
-cd django-chat-app
 ```
 -
 ## 🤝 Contributions
@@ -80,12 +79,12 @@ user-to-user-chatbot/
 ├── db.sqlite3             # SQLite database
 ├── manage.py
 └── requirements.txt
-👨‍💻 Author
-Rahul Ramesh
-🔗 
 
 ```
 
+## 👨‍💻 Author
+Rahul Ramesh
+🔗 https://github.com/rahulrameshm0/user-to-user-chatbot.git
 
 ## 🌐 Deployment (Optional)
 
