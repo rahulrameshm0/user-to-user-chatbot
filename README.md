@@ -64,11 +64,8 @@ Visit http://127.0.0.1:8000 in your browser.
 ```
 
 
+## 📁 Folder Structure
 ```bash
-📁 Folder Structure
-php
-Copy
-Edit
 user-to-user-chatbot/
 │
 ├── chatapp/               # Django app for chat logic
