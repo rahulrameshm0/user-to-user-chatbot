@@ -46,4 +46,4 @@ cd django-chat-app
 ```
 
 - 🤝 Contributions
-Feel free to fork this project and contribute to make it better.
+- Feel free to fork this project and contribute to make it better.
