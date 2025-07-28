@@ -48,23 +48,20 @@ source myenv/bin/activate  # On Windows: myenv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
-3. Install Dependencies
-bash
-Copy
-Edit
+## 3. Install Dependencies
+```bash
 pip install -r requirements.txt
-4. Run Migrations
-bash
-Copy
-Edit
+```
+## 4. Run Migrations
+```bash
 python manage.py makemigrations
 python manage.py migrate
-5. Start the Development Server
-bash
-Copy
-Edit
+```
+## 5. Start the Development Server
+```bash
 python manage.py runserver
 Visit http://127.0.0.1:8000 in your browser.
+```
 
 
 ```bash
