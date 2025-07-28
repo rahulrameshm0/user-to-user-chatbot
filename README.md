@@ -27,23 +27,6 @@ This project is a **user-to-user chat system** built using Django. It allows reg
 
 ## 📂 Folder Structure
 
-
----
-
-## 📸 Screenshots
-
-### 🏠 Home Page
-![Home Page](screenshots/screenshot-1.png)
-
-### 💬 Chat Page
-![Chat Page](screenshots/screenshot-2.png)
-
-### 🔔 Unread Messages
-![Unread Messages](screenshots/screenshot-3.png)
-
-
----
-
 ## ✅ How to Run
 
 1. Clone the repository:
