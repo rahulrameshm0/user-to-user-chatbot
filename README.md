@@ -33,13 +33,13 @@ This project is a **user-to-user chat system** built using Django. It allows reg
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](screenshots/home.png)
+![Home Page](screenshots/screenshot-1.png)
 
 ### 💬 Chat Page
-![Chat Page](screenshots/chat.png)
+![Chat Page](screenshots/screenshot-2.png)
 
 ### 🔔 Unread Messages
-![Unread Messages](screenshots/unread-messages.png)
+![Unread Messages](screenshots/screenshot-3.png)
 
 
 ---
