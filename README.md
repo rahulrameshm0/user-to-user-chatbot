@@ -45,5 +45,5 @@ git clone https://github.com/yourusername/django-chat-app.git
 cd django-chat-app
 ```
 
-- 🤝 Contributions
+## 🤝 Contributions
 - Feel free to fork this project and contribute to make it better.
