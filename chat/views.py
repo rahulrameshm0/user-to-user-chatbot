@@ -5,12 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from . models import Message
 from django.db.models import Q
+from django.contrib import messages
 # Create your views here.
 
-@login_required
-def home(request):
-    users = User.objects.exclude(id=request.user.id)
-    return render(request, 'home.html', {'users': users})
+# @login_required
+# def home(request):
+#     users = User.objects.exclude(id=request.user.id)
+#     return render(request, 'home.html', {'users': users})
 
 def sign_in(request):
     if request.user.is_authenticated:
@@ -69,6 +70,12 @@ def chat_user(request,username):
         )
         return redirect('chat_user', username=other_user.username)
     
+    Message.objects.filter(
+    sender=other_user,
+    receiver=current_user,
+    is_read=False
+    ).update(is_read=True)
+    
     messages = Message.objects.filter(
         Q(sender=request.user, receiver=other_user) |
         Q(sender=other_user, receiver=request.user),
@@ -88,3 +95,29 @@ def text_user(request):
         )
         output.save()
         return redirect('home')
+    
+def home(request):
+    current_user = request.user
+    users_data = []
+
+    users = User.objects.exclude(id=current_user.id)
+
+    for user in users:
+        last_message = Message.objects.filter(
+            Q(sender=current_user, receiver=user) |
+            Q(sender=user, receiver=current_user)
+        ).order_by('-timestamp').first()
+
+        unread_count = Message.objects.filter(
+            sender=user,
+            receiver=current_user,
+            is_read=False
+        ).count()
+
+        users_data.append({
+            'username': user.username,
+            'last_message': last_message.content if last_message else '',
+            'unread_count':int(unread_count)
+        })
+
+    return render(request, 'home.html', {'users': users_data})
