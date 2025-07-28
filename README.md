@@ -32,7 +32,15 @@ This project is a **user-to-user chat system** built using Django. It allows reg
 
 ## 📸 Screenshots
 
-> (You can add images of home page, chat page, and message interface here)
+### 🏠 Home Page
+![Home Page](screenshots/home.png)
+
+### 💬 Chat Page
+![Chat Page](screenshots/chat.png)
+
+### 🔔 Unread Messages
+![Unread Messages](screenshots/unread-messages.png)
+
 
 ---
 
